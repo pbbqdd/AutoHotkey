@@ -19,7 +19,7 @@ opentrack输入用udp，输出vjoy。安装vjoy驱动。过滤器可以随意，
 ```JoystickNumber = 2  ; 你的手柄编号 (通是 1)也可能是2
 TargetAxis = JoyV   ; 你想监控的摇杆轴 (例如 JoyX, JoyY, JoyZ, JoyR, POV)
 TargetAxis2 = JoyZ ;仰俯，因为没找到仰俯在哪抓，所以在ot上将其映射到z轴上。
-TargetAxis2 = JoyX ;平移，使用头部x轴平移锁定当前桌面
+TargetAxis2 = JoyX ;平移，使用头部x轴平移锁定当前窗口，主要靠腰部倾斜锁定。
 PollingInterval = 100 ; 轮询间隔，单位毫秒 (例如 20ms 意味着每秒检查 50 次)，不需要太高的间隔。
 
 ; --- 变量 ---
