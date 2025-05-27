@@ -6,7 +6,7 @@ JoystickNumber = 2  ; 你的手柄编号 (通常是 1)
 TargetAxis = JoyV   ; 你想监控的摇杆轴 (例如 JoyX, JoyY, JoyZ, JoyR, POV)
 TargetAxis2 = JoyZ ;仰俯，
 TargetAxis3 = JoyX
-PollingInterval = 100 ; 轮询间隔，单位毫秒 (例如 20ms 意味着每秒检查 50 次)
+PollingInterval = 200 ; 轮询间隔，单位毫秒 (例如 20ms 意味着每秒检查 50 次)
 
 ; --- 变量 ---
 ; 存储目标摇杆轴的上一次位置
@@ -36,7 +36,7 @@ Loop
         ; --- 位置变化时执行的操作 ---
         ; 示例：显示一个 Tooltip 显示当前位置
         ; Tooltip, Text [, X, Y, WhichTooltip]
-        Tooltip, %TargetAxis% 位置: %current_axisV_position% %current_axisU_position% %current_axisX_position%, , , 1 ; Tooltip ID 1
+        ;Tooltip, %TargetAxis% 位置: %current_axisV_position% %current_axisU_position% %current_axisX_position%, , , 1 ; Tooltip ID 1
 
         ; 你可以在这里根据 current_axis_position 的值执行不同的操作
         ; 例如：
