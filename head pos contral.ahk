@@ -46,7 +46,7 @@ Loop
          } else if (current_axisV_position >= r_act and axis_temp < 60 && current_axisU_position >axisU_th && current_axisX_position <X_r_edge && current_axisX_position >x_l_edge) {
             Send, {LWin down}{2}{LWin up} ; 如果摇杆向右移动超过阈值，发送右箭头键
              axis_temp=60
-         } else if (current_axisX_position >x_l_edge && current_axisX_position <X_r_edge && current_axisV_position > 47 && current_axisV_position < 53 && axis_temp !=50 && current_axisU_position >axisU_th){
+         } else if (current_axisX_position >x_l_edge && current_axisX_position <X_r_edge && current_axisV_position > 45 && current_axisV_position < 55 && axis_temp !=50 && current_axisU_position >axisU_th){
              ; 摇杆回到中心附近,这里设置一个47和53的左右回正补偿，防止看后视镜头部微小扭动。
             axis_temp=50
             Send, {LWin down}{3}{LWin up}
