@@ -17,8 +17,8 @@ axis_temp=50 ;设置一个标记，防止重复触发导致连键
 axisU_th=45;低头的阈值，看键盘的时候不触发。
 l_act=40
 r_act =60
-x_l_edge=40;X轴左右边界
-X_r_edge=60
+x_l_edge=42;X轴左右边界
+X_r_edge=58
 ; --- 主循环：持续检查手柄状态 ---
 Loop
 {
@@ -36,7 +36,7 @@ Loop
         ; --- 位置变化时执行的操作 ---
         ; 示例：显示一个 Tooltip 显示当前位置
         ; Tooltip, Text [, X, Y, WhichTooltip]
-        ;Tooltip, %TargetAxis% 位置: %current_axisV_position% %current_axisU_position% %current_axisX_position%, , , 1 ; Tooltip ID 1
+        Tooltip, %TargetAxis% 位置: %current_axisV_position% %current_axisU_position% %current_axisX_position%, , , 1 ; Tooltip ID 1
 
         ; 你可以在这里根据 current_axis_position 的值执行不同的操作
         ; 例如：
