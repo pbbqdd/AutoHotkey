@@ -21,7 +21,7 @@ l_act=40
 r_act =60
 x_l_edge=42;X轴左右边界
 X_r_edge=58
-flag_otreset=0
+flag_ot_reset=0 ;opentrack复位标志
 ; --- 主循环：持续检查手柄状态 ---
 Loop
 {
@@ -37,7 +37,7 @@ Loop
     ;if (current_axisZ_position != prev_axisZ_position || current_axisV_position != prev_axisV_position || current_axisU_position != prev_axisU_position || current_axisX_position != prev_axisX_position)
     if (current_axisV_position != prev_axisV_position || current_axisU_position != prev_axisU_position)
     
-    {   flag_otreset=0
+    {   flag_ot_reset=0
         ; --- 位置变化时执行的操作 ---
         ; 示例：显示一个 Tooltip 显示当前位置
         ; Tooltip, Text [, X, Y, WhichTooltip]
@@ -58,7 +58,7 @@ Loop
             axis_temp=50
             Send, {LWin down}{3}{LWin up}
             ;MouseMove, 800, 1000, 0
-         } else if ((current_axisZ_position > 65 || current_axisZ_position< 45) && (current_axisX_position >x_l_edge && current_axisX_position <X_r_edge) && current_axisU_position > axisU ){
+         } else if ((current_axisZ_position > 65 || current_axisZ_position< 45) && (current_axisX_position >x_l_edge && current_axisX_position <X_r_edge) && current_axisU_position > axisU_th ){
             ;sleep 500
             Send,^+/ 
             axis_temp=50
@@ -72,8 +72,8 @@ Loop
         ; 更新上一次的位置为当前位置
         prev_axisV_position := current_axisV_position
         prev_axisU_position := current_axisU_position
-    } else if(flag_otreset=0){
-        flag_otreset=1
+    } else if(flag_ot_reset=0){
+        flag_ot_reset=1
         ;sleep 500
         Send,^+/
     }
