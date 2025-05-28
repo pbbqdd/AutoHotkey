@@ -38,7 +38,7 @@ Loop
         ; --- 位置变化时执行的操作 ---
         ; 示例：显示一个 Tooltip 显示当前位置
         ; Tooltip, Text [, X, Y, WhichTooltip]
-        Tooltip, %TargetAxis% 位置: R:%current_axisV_position% Y:%current_axisU_position% X:%current_axisX_position% Z:%current_axisZ_position% , , , 1 ; Tooltip ID 1
+        ; Tooltip, %TargetAxis% 位置: R:%current_axisV_position% Y:%current_axisU_position% X:%current_axisX_position% Z:%current_axisZ_position% , , , 1 ; Tooltip ID 1
 
         ; 你可以在这里根据 current_axis_position 的值执行不同的操作
         ; 例如：
