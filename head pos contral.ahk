@@ -52,8 +52,10 @@ Loop
              ; 摇杆回到中心附近,这里设置一个47和53的左右回正补偿，防止看后视镜头部微小扭动。
             axis_temp=50
             Send, {LWin down}{3}{LWin up}
-         } else if (current_axisZ_position > 70 || current_axisZ_position< 40 ){
-            Send,^+/        
+         } else if (current_axisZ_position > 65 || current_axisZ_position< 45 && current_axisX_position >x_l_edge && current_axisX_position <X_r_edge){
+            Send,^+/ 
+            axis_temp=50
+            ;Send, {LWin down}{3}{LWin up}       
 
          } else {
 
