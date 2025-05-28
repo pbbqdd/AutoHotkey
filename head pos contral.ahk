@@ -38,7 +38,7 @@ Loop
         ; --- 位置变化时执行的操作 ---
         ; 示例：显示一个 Tooltip 显示当前位置
         ; Tooltip, Text [, X, Y, WhichTooltip]
-        ;Tooltip, %TargetAxis% 位置: V:%current_axisV_position% U:%current_axisU_position% X:%current_axisX_position% Z:%current_axisZ_position% , , , 1 ; Tooltip ID 1
+        Tooltip, %TargetAxis% 位置: V:%current_axisV_position% U:%current_axisU_position% X:%current_axisX_position% Z:%current_axisZ_position% , , , 1 ; Tooltip ID 1
 
         ; 你可以在这里根据 current_axis_position 的值执行不同的操作
         ; 例如：
@@ -69,6 +69,8 @@ Loop
         ; 更新上一次的位置为当前位置
         prev_axisV_position := current_axisV_position
         prev_axisU_position := current_axisU_position
+    } else {
+        Send,^+/
     }
 
     ; 暂停一小段时间，避免占用过多 CPU
