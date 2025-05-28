@@ -12,6 +12,7 @@
 - 用手挡脸后进行复位
 
 #### 配置：
+ot的复位快捷键是ctrl+shift+/;
 手机端使用headmod,ip设置成pcip。
 opentrack输入用udp，输出vjoy。安装vjoy驱动。过滤器可以随意，选项启用仰俯输出到z轴，航向输出到航向。
 启用autohotkey脚本
