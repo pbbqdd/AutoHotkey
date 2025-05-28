@@ -18,7 +18,7 @@ opentrack输入用udp，输出vjoy。安装vjoy驱动。过滤器可以随意，
 脚本参数：
 ```JoystickNumber = 2  ; 你的手柄编号 (通是 1)也可能是2
 TargetAxis = JoyV   ; 航向，转头你想监控的摇杆轴 (例如 JoyX, JoyY, JoyZ, JoyR, POV)
-TargetAxis2 = JoyU ; 仰俯，低头等一些常用习惯
+TargetAxis2 = JoyU ; 仰俯，低头抬头等一些常用习惯
 TargetAxis3 = JoyX ; 用于视角锁定   
 TargetAxis4 = JoyZ ;用于头部追踪修正
 PollingInterval = 100 ; 轮询间隔，单位毫秒 (例如 20ms 意味着每秒检查 50 次)，不需要太高的间隔。
@@ -42,4 +42,5 @@ r_act =60
 - 主窗口可能会随时改变，结合窗口名称将最后前置的作为主窗口。  
 - 其他符合人体的曲线。  
 - 配置窗口大小和位置。  
-- 用z轴进行头部复位  
+~~用z轴进行头部复位~~
+- 结合其他有益颈椎的活动ss
