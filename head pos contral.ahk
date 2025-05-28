@@ -7,7 +7,7 @@ TargetAxis = JoyV   ; 航向你想监控的摇杆轴 (例如 JoyX, JoyY, JoyZ, J
 TargetAxis2 = JoyU ;仰俯，
 TargetAxis3 = JoyX
 TargetAxis4 = JoyZ ;使用z轴进行重置
-PollingInterval = 50 ; 轮询间隔，单位毫秒 (例如 20ms 意味着每秒检查 50 次)
+PollingInterval = 100 ; 轮询间隔，单位毫秒 (例如 20ms 意味着每秒检查 50 次)
 
 ; --- 变量 ---
 ; 存储目标摇杆轴的上一次位置
@@ -21,6 +21,7 @@ l_act=40
 r_act =60
 x_l_edge=42;X轴左右边界
 X_r_edge=58
+flag_otreset=0
 ; --- 主循环：持续检查手柄状态 ---
 Loop
 {
@@ -33,12 +34,14 @@ Loop
     GetKeyState, current_axisZ_position, %JoystickNumber%%TargetAxis4%
     ; --- 检测位置变化 ---
     ; 如果当前位置与上一次位置不同
-    if (current_axisZ_position != prev_axisZ_position || current_axisV_position != prev_axisV_position || current_axisU_position != prev_axisU_position || current_axisX_position != prev_axisX_position)
-    {
+    ;if (current_axisZ_position != prev_axisZ_position || current_axisV_position != prev_axisV_position || current_axisU_position != prev_axisU_position || current_axisX_position != prev_axisX_position)
+    if (current_axisV_position != prev_axisV_position || current_axisU_position != prev_axisU_position)
+    
+    {   flag_otreset=0
         ; --- 位置变化时执行的操作 ---
         ; 示例：显示一个 Tooltip 显示当前位置
         ; Tooltip, Text [, X, Y, WhichTooltip]
-        Tooltip, %TargetAxis% 位置: V:%current_axisV_position% U:%current_axisU_position% X:%current_axisX_position% Z:%current_axisZ_position% , , , 1 ; Tooltip ID 1
+        ;Tooltip, %TargetAxis% 位置: V:%current_axisV_position% U:%current_axisU_position% X:%current_axisX_position% Z:%current_axisZ_position% , , , 1 ; Tooltip ID 1
 
         ; 你可以在这里根据 current_axis_position 的值执行不同的操作
         ; 例如：
@@ -69,7 +72,9 @@ Loop
         ; 更新上一次的位置为当前位置
         prev_axisV_position := current_axisV_position
         prev_axisU_position := current_axisU_position
-    } else {
+    } else if(flag_otreset=0){
+        flag_otreset=1
+        ;sleep 500
         Send,^+/
     }
 
