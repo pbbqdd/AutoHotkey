@@ -3,9 +3,10 @@
 
 ; --- 配置 ---
 JoystickNumber = 2  ; 你的手柄编号 (通常是 1)
-TargetAxis = JoyV   ; 你想监控的摇杆轴 (例如 JoyX, JoyY, JoyZ, JoyR, POV)
-TargetAxis2 = JoyZ ;仰俯，
+TargetAxis = JoyV   ; 航向你想监控的摇杆轴 (例如 JoyX, JoyY, JoyZ, JoyR, POV)
+TargetAxis2 = JoyU ;仰俯，
 TargetAxis3 = JoyX
+TargetAxis4 = JoyZ ;使用z轴进行重置
 PollingInterval = 200 ; 轮询间隔，单位毫秒 (例如 20ms 意味着每秒检查 50 次)
 
 ; --- 变量 ---
@@ -13,6 +14,7 @@ PollingInterval = 200 ; 轮询间隔，单位毫秒 (例如 20ms 意味着每秒
 prev_axisV_position := ""
 prev_axisU_position := ""
 prev_axisX_position := ""
+prev_axisZ_position := ""
 axis_temp=50 ;设置一个标记，防止重复触发导致连键
 axisU_th=45;低头的阈值，看键盘的时候不触发。
 l_act=40
@@ -28,15 +30,15 @@ Loop
     GetKeyState, current_axisV_position, %JoystickNumber%%TargetAxis%
     GetKeyState, current_axisU_position, %JoystickNumber%%TargetAxis2%
     GetKeyState, current_axisX_position, %JoystickNumber%%TargetAxis3%
-
+    GetKeyState, current_axisZ_position, %JoystickNumber%%TargetAxis4%
     ; --- 检测位置变化 ---
     ; 如果当前位置与上一次位置不同
-    if (current_axisV_position != prev_axisV_position || current_axisU_position != prev_axisU_position || current_axisX_position != prev_axisX_position)
+    if (current_axisZ_position != prev_axisZ_position || current_axisV_position != prev_axisV_position || current_axisU_position != prev_axisU_position || current_axisX_position != prev_axisX_position)
     {
         ; --- 位置变化时执行的操作 ---
         ; 示例：显示一个 Tooltip 显示当前位置
         ; Tooltip, Text [, X, Y, WhichTooltip]
-        Tooltip, %TargetAxis% 位置: %current_axisV_position% %current_axisU_position% %current_axisX_position%, , , 1 ; Tooltip ID 1
+        Tooltip, %TargetAxis% 位置: R:%current_axisV_position% Y:%current_axisU_position% X:%current_axisX_position% Z:%current_axisZ_position% , , , 1 ; Tooltip ID 1
 
         ; 你可以在这里根据 current_axis_position 的值执行不同的操作
         ; 例如：
@@ -50,6 +52,9 @@ Loop
              ; 摇杆回到中心附近,这里设置一个47和53的左右回正补偿，防止看后视镜头部微小扭动。
             axis_temp=50
             Send, {LWin down}{3}{LWin up}
+         } else if (current_axisZ_position > 70 || current_axisZ_position< 40 ){
+            Send,^+/        
+
          } else {
 
          }
@@ -66,6 +71,10 @@ Loop
 
 ; --- 退出脚本的热键 (可选) ---
 ; 按下 Esc 键退出脚本
+^+z::
+    Pause
+    Send,^+/ ;
+return
 Esc::
     ; 退出前隐藏 Tooltip
     Tooltip, , , 1
