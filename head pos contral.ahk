@@ -58,7 +58,7 @@ Loop
             axis_temp=50
             Send, {LWin down}{3}{LWin up}
             ;MouseMove, 800, 1000, 0
-         } else if ((current_axisZ_position > 65 || current_axisZ_position< 45) && (current_axisX_position >x_l_edge && current_axisX_position <X_r_edge) && current_axisU_position > axisU_th ){
+         } else if ((current_axisZ_position > 65 || current_axisZ_position< 45) && (current_axisX_position >x_l_edge && current_axisX_position <X_r_edge) && current_axisU_position > axisU_th && current_axisU_position < 70){
             ;sleep 500
             Send,^+/ 
             axis_temp=50
@@ -74,7 +74,7 @@ Loop
         prev_axisU_position := current_axisU_position
     } else if(flag_ot_reset=0){
         flag_ot_reset=1
-        ;sleep 500
+        sleep 500 ;加入一个遮脸延迟，防止手臂干扰
         Send,^+/
     }
 
