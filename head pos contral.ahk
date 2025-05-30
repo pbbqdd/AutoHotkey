@@ -6,7 +6,7 @@ TargetAxis = JoyV   ; 航向你想监控的摇杆轴 (例如 JoyX, JoyY, JoyZ, J
 TargetAxis2 = JoyU ;仰俯，
 TargetAxis3 = JoyX
 TargetAxis4 = JoyZ ;使用z轴进行重置
-PollingInterval = 50 ; 轮询间隔，单位毫秒 (例如 20ms 意味着每秒检查 50 次)
+PollingInterval = 20 ; 轮询间隔，单位毫秒 (例如 20ms 意味着每秒检查 50 次)
 window := [] ;转头检测速度的一个窗口数组
 ;window.SetCapacity(10)
 
@@ -23,8 +23,8 @@ r_act =53
 x_l_edge=42;X轴左右边界
 X_r_edge=58
 flag_ot_reset=0 ;opentrack复位标志
-V_speed=1 ;转头速度阈值
-window_r(l,v,w){ ;返回一个速度转头瞬时速度
+V_speed=0.7 ;转头速度阈值
+window_r(l,v,w){ ;返回一个速度转头瞬时速度 和采样率负相关，采样越高这个值越小
     if(l < 5){ ;取一个5次采样的作为计算速度的范围
         w.Push(v)
     }Else
@@ -76,16 +76,16 @@ Loop
            Send, {LWin down}{1}{LWin up} ; 如果摇杆向左移动超过阈值，发送左箭头键
            ;MouseMove, 800, 1000, 0
            axis_temp=40
-         } else if (current_axisV_position >= r_act and axis_temp < 60 && current_axisU_position >axisU_th && current_axisX_position <X_r_edge && current_axisX_position >x_l_edge && w >V_speed) {
+         } else if (current_axisV_position >= r_act and axis_temp < 60 && current_axisU_position >axisU_th &&  current_axisX_position >x_l_edge && w >V_speed) {
             Send, {LWin down}{2}{LWin up} ; 如果摇杆向右移动超过阈值，发送右箭头键
             ;MouseMove, 800, 1000, 0
              axis_temp=60
-         } else if (current_axisX_position >x_l_edge && current_axisX_position <X_r_edge && current_axisV_position > 45 && current_axisV_position < 55 && axis_temp !=50 && current_axisU_position >axisU_th && w < -V_speed){
+         } else if (current_axisX_position >x_l_edge &&  current_axisV_position > 45 && current_axisV_position < 55 && axis_temp !=50 && current_axisU_position >axisU_th && w < -V_speed){
              ; 摇杆回到中心附近,这里设置一个47和53的左右回正补偿，防止看后视镜头部微小扭动。
             axis_temp=50
             Send, {LWin down}{3}{LWin up}
             ;MouseMove, 800, 1000, 0
-         } else if ((current_axisZ_position > 65 || current_axisZ_position< 45) && (current_axisX_position >x_l_edge && current_axisX_position <X_r_edge) && current_axisU_position > axisU_th && current_axisU_position < 70){
+         } else if ((current_axisZ_position > 65 || current_axisZ_position< 45) && current_axisU_position > axisU_th && current_axisU_position < 70){
             ;sleep 500
             Send,^+/ 
             axis_temp=50
