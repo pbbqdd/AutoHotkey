@@ -1,4 +1,5 @@
-﻿#Persistent         ; 让脚本持续运行
+﻿;初版，使用固定的回中算法。目前已废弃。v1版脚本
+#Persistent         ; 让脚本持续运行
 #SingleInstance force ; 防止重复运行脚本
 ; --- 配置 ---
 JoystickNumber = 2  ; 你的手柄编号 (通常是 1)

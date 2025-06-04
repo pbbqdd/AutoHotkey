@@ -1,5 +1,5 @@
 #Requires AutoHotkey v2.0
-
+;初版的v2版本
 ; AutoHotkey v2 Script
 #SingleInstance Force ; 防止重复运行脚本
 
