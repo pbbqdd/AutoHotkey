@@ -150,7 +150,7 @@ Loop
         roll_max_boundary := neutral_axisX + Roll_Deadzone_HalfWidth         ; 滚转允许范围上限
 
         ; Tooltip("V:" current_axisV_position " U:" current_axisU_position " X:" current_axisX_position " Z:" current_axisZ_position " Speed:" current_w_speed "`nNeutral V:" neutral_axisV " X:" neutral_axisX "`nState:" axis_state, , , 1) ; 调试用，显示所有关键数据和当前状态。
-        Tooltip( "Speed:" current_w_speed "`nNeutral V:" neutral_axisV " X:" neutral_axisX "`nState:" axis_state, , , 1)
+        ; Tooltip( "Speed:" current_w_speed "`nNeutral V:" neutral_axisV " X:" neutral_axisX "`nState:" axis_state, , , 1)
         ; 4. 根据当前状态和头部姿态/速度判断并触发动作。
         ; 首先检查头部是否在允许的仰俯和滚转范围内。这是所有航向动作的前提条件。
         if (current_axisU_position > axisU_th && current_axisX_position > roll_min_boundary && current_axisX_position < roll_max_boundary) {
